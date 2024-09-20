@@ -1,0 +1,1 @@
+alter table users add column user_type varchar(255) null;

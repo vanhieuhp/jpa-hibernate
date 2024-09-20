@@ -1,0 +1,26 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<!DOCTYPE hibernate-configuration PUBLIC-->
+<!--        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"-->
+<!--        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">-->
+<!--<hibernate-configuration>-->
+<!--    <session-factory>-->
+<!--        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>-->
+<!--        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/jpa</property>-->
+<!--        <property name="hibernate.connection.username">admin</property>-->
+<!--        <property name="connection.password">admin</property>-->
+<!--        <property name="connection.poolSize">1</property>-->
+<!--        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>-->
+<!--        <property name="show_sql">true</property>-->
+<!--        <property name="hibernate.format_sql">true</property>-->
+<!--        <property name="hibernate.current_session_context_class">thread</property>-->
+<!--        <property name="hibernate.cache.use_second_level_cache">true</property>-->
+<!--        <property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>-->
+<!--        <property name="hibernate.cache.provider_configuration_file_resource_path">ehcache.xml</property>-->
+
+<!--&lt;!&ndash;        <mapping class="entity.Author" />&ndash;&gt;-->
+
+
+<!--        &lt;!&ndash;<listener class="MyPostCreatedEventListener" type="post-insert" />&ndash;&gt;-->
+<!--        &lt;!&ndash;<listener class="MyPreCreatedEventListener" type="pre-insert" />&ndash;&gt;-->
+<!--    </session-factory>-->
+<!--</hibernate-configuration>-->

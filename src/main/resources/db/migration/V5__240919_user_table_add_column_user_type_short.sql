@@ -1,0 +1,1 @@
+alter table users add column short_type char(1) null;
