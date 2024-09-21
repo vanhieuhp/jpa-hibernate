@@ -129,7 +129,7 @@ public class UserServiceImpl implements UserService {
         }
 
         Set<Group> h_groups = filter.getGroups().stream()
-                .map(group -> Group.builder().name(group).build())
+                .map(group -> Group.builder().title(group).build())
                 .collect(Collectors.toSet());
         return UserFilter.builder()
                 .username(filter.getUsername())

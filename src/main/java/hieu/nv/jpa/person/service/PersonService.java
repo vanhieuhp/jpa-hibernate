@@ -9,4 +9,6 @@ public interface PersonService {
 	Iterable<Person> getAllPersons();
 
 	Person createPerson(PersonDto personDto);
+
+	Person updatePerson(String id, PersonDto personDto);
 }

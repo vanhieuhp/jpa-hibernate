@@ -1,9 +1,7 @@
 package hieu.nv.jpa.movies.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.UuidGenerator;
 import org.springframework.data.annotation.CreatedDate;
@@ -31,4 +29,9 @@ public class Movie {
 	@CreatedDate
 	@Column(name = "created_date")
 	private Date createdDate;
+
+	@JsonBackReference
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="cinema_id")
+	private Cinema assignedCinema;
 }

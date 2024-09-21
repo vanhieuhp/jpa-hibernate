@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -22,8 +23,11 @@ public class Group {
 	@UuidGenerator
 	private String id;
 
-	@Column(name = "name")
-	private String name;
+	@Column(name = "title")
+	private String title;
+
+	@Column(name = "created_at")
+	private Date createdAt;
 
 	@ManyToMany(mappedBy = "h_groups", fetch = FetchType.LAZY)
 	@ToString.Exclude

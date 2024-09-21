@@ -36,6 +36,7 @@ public class Author {
 	@Column(name = "age")
 	private Integer age;
 
+	@OrderBy("title DESC")
 	@BatchSize(size=3)
 	@OneToMany(
 			mappedBy = "author",

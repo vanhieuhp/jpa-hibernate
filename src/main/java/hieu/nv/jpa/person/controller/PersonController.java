@@ -34,4 +34,13 @@ public class PersonController {
 		}
 		return ResponseEntity.notFound().build();
 	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<Person> updatePerson(@PathVariable String id, @RequestBody PersonDto personDto) {
+		Person person = personService.updatePerson(id, personDto);
+		if (person != null) {
+			return ResponseEntity.ok(person);
+		}
+		return ResponseEntity.notFound().build();
+	}
 }

@@ -46,7 +46,7 @@ public interface UserRepository extends JpaRepository<User, String>, JpaSpecific
 			filter.getGroups().ifPresent(groups -> {
 				Join<Object, Object> groupJoin = root.join("h_groups", JoinType.INNER);
 				Predicate[] predicates = groups.stream()
-						.map(group -> builder.equal(groupJoin.get("name"), group.getName()))
+						.map(group -> builder.equal(groupJoin.get("name"), group.getTitle()))
 						.toArray(Predicate[]::new);
 				exps.add(builder.or(predicates));
 			});

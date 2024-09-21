@@ -1,10 +1,10 @@
-CREATE TABLE supermarkets
+CREATE TABLE if not exists supermarkets
 (
     id   VARCHAR(255) PRIMARY KEY,
     name VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE supermarket_addresses
+CREATE TABLE if not exists supermarket_addresses
 (
     supermarket_id VARCHAR(255) NOT NULL,
     street         VARCHAR(255),

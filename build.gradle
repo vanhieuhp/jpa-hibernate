@@ -42,6 +42,8 @@ dependencies {
 	implementation 'org.hibernate.orm:hibernate-jcache:6.2.0.CR2'
 	implementation 'org.ehcache:ehcache:3.10.8'
 
+// https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api
+	implementation 'jakarta.validation:jakarta.validation-api:3.1.0'
 
 
 }

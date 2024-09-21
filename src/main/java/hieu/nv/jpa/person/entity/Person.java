@@ -1,16 +1,15 @@
 package hieu.nv.jpa.person.entity;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UuidGenerator;
 import jakarta.persistence.*;
 import lombok.*;
 
+@DynamicInsert
+@DynamicUpdate
 @Entity
-@Getter
-@Setter
-@Builder
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Table(name = "persons")
 @SecondaryTable(
 		name = "person_contacts",

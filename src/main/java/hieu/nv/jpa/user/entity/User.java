@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.Set;
@@ -49,6 +50,9 @@ public class User {
 
     @Transient
     private String fullName;
+
+    @Formula("concat(first_name, ' ', last_name)")
+    private String displayName;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
