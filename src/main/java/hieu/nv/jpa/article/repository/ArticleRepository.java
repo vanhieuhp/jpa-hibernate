@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository("articleRepository")
-//@Transactional
 public interface ArticleRepository extends JpaRepository<Article, String>, JpaSpecificationExecutor<Article> {
 
 	@QueryHints(value = {
@@ -33,4 +32,7 @@ public interface ArticleRepository extends JpaRepository<Article, String>, JpaSp
 
 	@Query("SELECT a FROM Article a")
 	List<ArticleTitleAndAuthorProjection> findAllWithProject();
+
+	@Query("SELECT a FROM Article a WHERE a.vote.rate = :rate")
+	List<Article> findByVoteRate(int rate);
 }

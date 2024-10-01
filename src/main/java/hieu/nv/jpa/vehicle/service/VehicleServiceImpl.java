@@ -1,5 +1,7 @@
 package hieu.nv.jpa.vehicle.service;
 
+import hieu.nv.jpa.vehicle.dto.VehicleDto;
+import hieu.nv.jpa.vehicle.entity.Vehicle;
 import hieu.nv.jpa.vehicle.entity.VehicleBike;
 import hieu.nv.jpa.vehicle.entity.VehicleCar;
 import hieu.nv.jpa.vehicle.repository.VehicleCarRepository;
@@ -49,5 +51,10 @@ public class VehicleServiceImpl implements VehicleService {
 	public VehicleBike saveBike(VehicleBike vehicleBike) {
 		vehicleRepository.save(vehicleBike);
 		return vehicleBike;
+	}
+
+	@Override
+	public List<Vehicle> getAllVehicles() {
+		return vehicleRepository.findAllVehicles();
 	}
 }

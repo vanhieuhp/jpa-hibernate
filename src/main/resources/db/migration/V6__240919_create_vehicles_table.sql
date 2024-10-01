@@ -6,3 +6,4 @@ CREATE TABLE vehicles
     has_sidecar  BOOLEAN,
     vehicle_type VARCHAR(31) NOT NULL
 );
+

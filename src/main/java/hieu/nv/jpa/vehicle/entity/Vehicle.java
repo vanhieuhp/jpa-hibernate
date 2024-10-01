@@ -12,7 +12,8 @@ import org.hibernate.annotations.UuidGenerator;
 @AllArgsConstructor
 @Table(name = "vehicles")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "vehicle_type", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "vehicle_type",
+		discriminatorType = DiscriminatorType.STRING)
 public class Vehicle {
 
 	@Id

@@ -41,9 +41,8 @@ public class Author {
 	@OneToMany(
 			mappedBy = "author",
 			fetch = FetchType.LAZY,
-			cascade = {CascadeType.ALL},
-			orphanRemoval = true
-	)
+			cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+			orphanRemoval = true)
 	@JsonManagedReference
 	@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private List<Article> articles = new ArrayList<>();

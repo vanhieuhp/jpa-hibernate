@@ -1,5 +1,4 @@
 package hieu.nv.jpa.patient.entity;
-import hieu.nv.jpa.address.entity.Address;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;

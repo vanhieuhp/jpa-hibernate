@@ -1,5 +1,7 @@
 package hieu.nv.jpa.vehicle.service;
 
+import hieu.nv.jpa.vehicle.dto.VehicleDto;
+import hieu.nv.jpa.vehicle.entity.Vehicle;
 import hieu.nv.jpa.vehicle.entity.VehicleBike;
 import hieu.nv.jpa.vehicle.entity.VehicleCar;
 
@@ -17,4 +19,6 @@ public interface VehicleService {
 	void deleteCar(String carId);
 
 	VehicleBike saveBike(VehicleBike vehicleBike);
+
+	List<Vehicle> getAllVehicles();
 }

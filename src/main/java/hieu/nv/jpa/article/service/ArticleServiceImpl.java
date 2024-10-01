@@ -2,12 +2,15 @@ package hieu.nv.jpa.article.service;
 
 import hieu.nv.jpa.article.dto.ArticleRequest;
 import hieu.nv.jpa.article.entity.Article;
+import hieu.nv.jpa.article.entity.Vote;
 import hieu.nv.jpa.article.projection.ArticleTitleAndAuthorProjection;
 import hieu.nv.jpa.article.repository.ArticleRepository;
+import hieu.nv.jpa.author.entity.Author;
 import hieu.nv.jpa.random.RandomStringService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,14 +54,22 @@ public class ArticleServiceImpl implements ArticleService {
 
 //		Author author = new Author("John Doe");
 		String randomString = randomStringSv.generateRandomString(6);
-		Article article = new Article();
-		article.setTitle("Hello JPA " + randomString);
-		article.setContent("This is a sample article");
+//		Article article = new Article();
+//		article.setTitle("Hello JPA " + randomString);
+//		article.setContent("This is a sample article");
 //		author.getArticles().add(article);
 //		entityManager.persist(author);
 //		entityManager.merge(author);
-		entityManager.persist(article);
-		return article;
+//		entityManager.persist(article);
+//		return article;
+
+		Article article = new Article();
+		article.setTitle(articleRequest.getTitle() + " " + randomString);
+		article.setContent(articleRequest.getContent());
+		Vote vote = new Vote(articleRequest.getReview(), articleRequest.getRate());
+		article.setVote(vote);
+
+		return articleRepository.save(article);
 	}
 
 	@Override
@@ -84,6 +95,7 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
+	@Transactional
 	public void deleteArticle(String id) {
 		articleRepository.deleteById(id);
 	}
@@ -96,5 +108,10 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public List<ArticleTitleAndAuthorProjection> getAllArticlesWithProject() {
 		return articleRepository.findAllWithProject();
+	}
+
+	@Override
+	public List<Article> getByVoteRate(ArticleRequest request) {
+		return articleRepository.findByVoteRate(request.getRate());
 	}
 }

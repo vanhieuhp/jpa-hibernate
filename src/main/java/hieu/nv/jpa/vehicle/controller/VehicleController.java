@@ -1,5 +1,7 @@
 package hieu.nv.jpa.vehicle.controller;
 
+import hieu.nv.jpa.vehicle.dto.VehicleDto;
+import hieu.nv.jpa.vehicle.entity.Vehicle;
 import hieu.nv.jpa.vehicle.entity.VehicleBike;
 import hieu.nv.jpa.vehicle.entity.VehicleCar;
 import hieu.nv.jpa.vehicle.service.VehicleService;
@@ -43,5 +45,10 @@ public class VehicleController {
 	@DeleteMapping("/cars/{carId}")
 	public void deleteCar(@PathVariable String carId) {
 		vehicleService.deleteCar(carId);
+	}
+
+	@GetMapping
+	public List<Vehicle> getAllVehicles() {
+		return vehicleService.getAllVehicles();
 	}
 }

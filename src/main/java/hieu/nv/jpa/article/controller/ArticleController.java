@@ -5,7 +5,6 @@ import hieu.nv.jpa.article.entity.Article;
 import hieu.nv.jpa.article.projection.ArticleTitleAndAuthorProjection;
 import hieu.nv.jpa.article.service.ArticleService;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.Parameter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,6 +56,12 @@ public class ArticleController {
 	@GetMapping("/authors")
 	public ResponseEntity<List<Article>> getByAuthorName(@RequestParam(name = "name") String authorName) {
 		List<Article> articles = articleService.getByAuthorName(authorName);
+		return ResponseEntity.ok(articles);
+	}
+
+	@PostMapping("/vote")
+	public ResponseEntity<List<Article>> getByVoteRate(@RequestBody ArticleRequest request) {
+		List<Article> articles = articleService.getByVoteRate(request);
 		return ResponseEntity.ok(articles);
 	}
 

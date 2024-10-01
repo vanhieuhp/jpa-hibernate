@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,12 +60,14 @@ public class AuthorServiceImpl implements AuthorService {
 	}
 
 	@Override
-//	@Transactional
+	@Transactional
 	public void deleteAuthor(String authorId) {
 		// Deleting an author along with its related entities due to cascade operations
 		Author author = authorRepository.findById(authorId).orElseThrow();
 //		author.getArticles().removeFirst();
+//		author.setArticles(new ArrayList<>());
 //		author.getArticles().removeIf(article -> article.getId().equals("9f24fcaf-745f-40bb-8719-62c9ccea989c"));
+//		authorRepository.save(author);
 		authorRepository.delete(author);
 	}
 

@@ -20,4 +20,6 @@ public interface ArticleService {
 	List<Article> getByAuthorName(String authorName);
 
 	List<ArticleTitleAndAuthorProjection> getAllArticlesWithProject();
+
+	List<Article> getByVoteRate(ArticleRequest request);
 }

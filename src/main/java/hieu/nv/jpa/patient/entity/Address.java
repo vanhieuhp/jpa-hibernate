@@ -1,4 +1,4 @@
-package hieu.nv.jpa.address.entity;
+package hieu.nv.jpa.patient.entity;
 
 import jakarta.persistence.Embeddable;
 import lombok.*;

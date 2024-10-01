@@ -5,7 +5,9 @@ create table if not exists users
     first_name   varchar(255)             null,
     last_name    varchar(255)             null,
     phone_number varchar(255)             null,
-    username     varchar(255)             null
+    username     varchar(255)             null,
+    user_type    varchar(255)             null,
+    short_type   char(1)                  null
 );
 
 create table if not exists roles
@@ -27,7 +29,7 @@ create table if not exists h_groups
 (
     id         VARCHAR(255) PRIMARY KEY,
     title      VARCHAR(255) UNIQUE NOT NULL,
-    created_at datetime(6)           NOT NULL
+    created_at datetime(6)         NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS users_groups
