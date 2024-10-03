@@ -21,8 +21,6 @@ public class MovieServiceImpl implements MovieService {
 	public Movie createMovie(MovieRequest movie) {
 		Movie newMovie = new Movie();
 		newMovie.setTitle(movie.getTitle());
-		newMovie.setGenre(movie.getGenre());
-		newMovie.setYear(movie.getYear());
 		return movieRepository.save(newMovie);
 	}
 
@@ -36,9 +34,8 @@ public class MovieServiceImpl implements MovieService {
 	@Transactional
 	public Movie updateMovie(String id, MovieRequest movie) {
 		Movie existingMovie = movieRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+		System.out.println("Update movie: " + existingMovie.getId());
 		existingMovie.setTitle(movie.getTitle());
-		existingMovie.setGenre(movie.getGenre());
-		existingMovie.setYear(movie.getYear());
 		return existingMovie;
 	}
 
@@ -49,11 +46,24 @@ public class MovieServiceImpl implements MovieService {
 
 	@Override
 	public List<Movie> getAllMovies() {
-		return movieRepository.findAll();
+		return movieRepository.findAllMovies();
 	}
 
 	@Override
 	public List<Movie> getAllMoviesByYear(String year) {
 		return movieRepository.findAllByYear(year);
 	}
+
+	@Override
+	public List<?> getAllByGenre(String genre) {
+
+		System.out.println("findAllByGenreLittleField");
+		movieRepository.findAllByGenreLittleField(genre);
+
+		System.out.println("findAllByGenreProjection");
+		movieRepository.findAllByGenreProjection(genre);
+
+		return null;
+	}
+
 }

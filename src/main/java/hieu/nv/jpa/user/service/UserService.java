@@ -23,5 +23,7 @@ public interface UserService {
 
     List<User> filterUser(@NotNull UserFilterDto filter);
 
+    List<User> listUserType();
 
+    List<User> findByUserIds(List<String> userIds);
 }

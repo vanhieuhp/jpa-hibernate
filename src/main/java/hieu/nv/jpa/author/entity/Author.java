@@ -36,15 +36,14 @@ public class Author {
 	@Column(name = "age")
 	private Integer age;
 
-	@OrderBy("title DESC")
+	@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	@BatchSize(size=3)
+	@JsonManagedReference
 	@OneToMany(
 			mappedBy = "author",
 			fetch = FetchType.LAZY,
-			cascade = {CascadeType.PERSIST, CascadeType.MERGE},
-			orphanRemoval = true)
-	@JsonManagedReference
-	@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+			cascade = {CascadeType.ALL})
+	@OrderBy("title DESC")
 	private List<Article> articles = new ArrayList<>();
 
 	public Author(String name) {

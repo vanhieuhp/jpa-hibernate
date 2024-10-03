@@ -6,8 +6,8 @@ import org.hibernate.annotations.UuidGenerator;
 import jakarta.persistence.*;
 import lombok.*;
 
-@DynamicInsert
-@DynamicUpdate
+//@DynamicInsert
+//@DynamicUpdate
 @Entity
 @Data
 @Table(name = "persons")

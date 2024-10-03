@@ -18,4 +18,6 @@ public interface MovieService {
 	List<Movie> getAllMovies();
 
 	List<Movie> getAllMoviesByYear(String year);
+
+	List<?> getAllByGenre(String genre);
 }

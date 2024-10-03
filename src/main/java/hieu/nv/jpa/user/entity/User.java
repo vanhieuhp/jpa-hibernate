@@ -36,25 +36,30 @@ public class User {
     @Column(name = "username")
     private String username;
 
+    @Transient
     @Column(name = "email")
     private String email;
 
+    @Transient
     @Column(name = "first_name")
     private String firstName;
 
+    @Transient
     @Column(name = "last_name")
     private String lastName;
 
+    @Transient
     @Column(name = "phone_number")
     private String phoneNumber;
 
     @Transient
     private String fullName;
 
+    @Transient
     @Formula("concat(first_name, ' ', last_name)")
     private String displayName;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
@@ -64,7 +69,7 @@ public class User {
     @JsonManagedReference
     private Set<Role> roles;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_groups",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"))
@@ -72,43 +77,15 @@ public class User {
     @JsonManagedReference
     private Set<Group> h_groups;
 
+//    @Transient
     @Column(name = "user_type")
     @Enumerated(EnumType.STRING)
     private UserType userType;
 
+    @Transient
     @Column(name = "short_type")
 //    @Enumerated(EnumType.STRING)
     private UserShortType shortType;
-
-    public enum UserType {
-        ADMIN,
-        USER,
-        GUEST
-    }
-
-    public enum UserShortType {
-        ADMIN("A"),
-        USER("U"),
-        GUEST("G");
-        private final String code;
-
-        UserShortType(String code) {
-            this.code = code;
-        }
-
-        public String getCode() {
-            return code;
-        }
-
-        public static UserShortType fromCode(String code) {
-            for (UserShortType userType : UserShortType.values()) {
-                if (userType.getCode().equals(code)) {
-                    return userType;
-                }
-            }
-            throw new IllegalArgumentException("Unknown code: " + code);
-        }
-    }
 
     public String getFullName() {
         return firstName + " " + lastName;

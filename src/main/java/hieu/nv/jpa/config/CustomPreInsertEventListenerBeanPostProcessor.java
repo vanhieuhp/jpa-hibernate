@@ -1,5 +1,6 @@
 package hieu.nv.jpa.config;
 
+import hieu.nv.jpa.listener.CustomPostInsertEventListener;
 import hieu.nv.jpa.listener.CustomPreInsertEventListener;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NonNull;
@@ -15,24 +16,28 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 public class CustomPreInsertEventListenerBeanPostProcessor implements BeanPostProcessor {
 
-	private final CustomPreInsertEventListener customPreInsertEventListener;
+    private final CustomPreInsertEventListener customPreInsertEventListener;
+    private final CustomPostInsertEventListener customPostInsertEventListener;
 
-	@Override
-	public Object postProcessAfterInitialization(
-			@NonNull Object bean,
-			@NonNull String beanName
-	) throws BeansException {
-		if (bean instanceof EntityManagerFactory entityManagerFactory) {
-			SessionFactoryImpl sessionFactory = entityManagerFactory.unwrap(SessionFactoryImpl.class);
-			EventListenerRegistry registry = sessionFactory
-					.getServiceRegistry()
-					.getService(EventListenerRegistry.class);
-			assert registry != null;
-			registry.getEventListenerGroup(EventType.PRE_INSERT)
-					.appendListener(customPreInsertEventListener);
-		}
+    @Override
+    public Object postProcessAfterInitialization(
+            @NonNull Object bean,
+            @NonNull String beanName
+    ) throws BeansException {
+        if (bean instanceof EntityManagerFactory entityManagerFactory) {
+            SessionFactoryImpl sessionFactory = entityManagerFactory.unwrap(SessionFactoryImpl.class);
+            EventListenerRegistry registry = sessionFactory
+                    .getServiceRegistry()
+                    .getService(EventListenerRegistry.class);
+            assert registry != null;
+            registry.getEventListenerGroup(EventType.PRE_INSERT)
+                    .appendListener(customPreInsertEventListener);
 
-		return bean;
-	}
+            registry.getEventListenerGroup(EventType.POST_INSERT)
+					.appendListener(customPostInsertEventListener);
+        }
+
+        return bean;
+    }
 
 }

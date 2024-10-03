@@ -12,4 +12,8 @@ public interface PaymentService {
     Payment getPaymentById(String id);
 
     BigDecimal getTotalAmount();
+
+    Payment updatePayment(String id, Payment payment);
+
+    Payment decreasePayment(String id, BigDecimal amount);
 }

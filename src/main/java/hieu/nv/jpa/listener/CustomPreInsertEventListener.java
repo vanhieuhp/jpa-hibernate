@@ -13,14 +13,11 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class CustomPreInsertEventListener implements PreInsertEventListener {
 
-	private final RandomStringService randomStringService;
-
 	@Override
 	public boolean onPreInsert(PreInsertEvent event) {
 		// Your logic before insertion
-		if (event.getEntity() instanceof Article) {
-			Article article = (Article) event.getEntity();
-			article.setContent("This is a sample article " + randomStringService.generateRandomString(10));
+		if (event.getEntity() instanceof Article article) {
+			System.out.println("[Before] Article is being inserted: " + article);
 		}
 		return false;
 	}

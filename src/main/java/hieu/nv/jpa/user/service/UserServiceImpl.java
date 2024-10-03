@@ -6,6 +6,7 @@ import hieu.nv.jpa.user.dto.UserFilter;
 import hieu.nv.jpa.user.dto.UserFilterDto;
 import hieu.nv.jpa.user.dto.UserRequest;
 import hieu.nv.jpa.user.entity.User;
+import hieu.nv.jpa.user.entity.UserType;
 import hieu.nv.jpa.user.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -55,8 +56,12 @@ public class UserServiceImpl implements UserService {
 //    @Transactional
     public User getUserById(String id) {
         User user = userRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        log.info("Full name: {}", user.getFullName());
-        return user;
+//        log.info("Full name: {}", user.getFullName());
+        User result = new User();
+        result.setUsername(user.getUsername());
+        result.setRoles(user.getRoles());
+        return result;
+//        return user;
     }
 
     @Override
@@ -104,6 +109,33 @@ public class UserServiceImpl implements UserService {
         Page<User> page =  userRepository.findAll(where(specification), pagination);
 
         return page.getContent();
+    }
+
+    @Override
+    public List<User> listUserType() {
+        List<User> users = userRepository.findByUserTypeIn(List.of(UserType.USER, UserType.ADMIN));
+        return users.stream()
+                .map(user -> {
+                    User result = new User();
+                    result.setId(user.getId());
+                    result.setUsername(user.getUsername());
+                    result.setRoles(user.getRoles());
+                    return result;
+                })
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<User> findByUserIds(List<String> userIds) {
+        return userRepository.findByUserIds(userIds).stream()
+                .map(user -> {
+                    User result = new User();
+                    result.setId(user.getId());
+                    result.setUsername(user.getUsername());
+//                    result.setRoles(user.getRoles());
+                    return result;
+                })
+                .collect(Collectors.toList());
     }
 
     @NonNull

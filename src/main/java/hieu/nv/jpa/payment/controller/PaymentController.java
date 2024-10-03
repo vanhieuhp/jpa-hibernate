@@ -38,4 +38,16 @@ public class PaymentController {
         BigDecimal totalAmount = paymentService.getTotalAmount();
         return ResponseEntity.ok(totalAmount);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Payment> updatePayment(@PathVariable String id, @RequestBody Payment payment) {
+        Payment updatedPayment = paymentService.updatePayment(id, payment);
+        return ResponseEntity.ok(updatedPayment);
+    }
+
+    @PutMapping("/{id}/decrease")
+    public ResponseEntity<Payment> decreasePayment(@PathVariable String id, @RequestBody Payment payment) {
+        Payment updatedPayment = paymentService.decreasePayment(id, payment.getAmount());
+        return ResponseEntity.ok(updatedPayment);
+    }
 }

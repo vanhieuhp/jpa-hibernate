@@ -44,4 +44,9 @@ public class MovieController {
 	public List<Movie> getAllMoviesByYear(@RequestParam(name = "year") String year) {
 		return movieService.getAllMoviesByYear(year);
 	}
+
+	@GetMapping("/genre")
+	public List<?> getAllByGenre(@RequestParam(name = "genre") String genre) {
+		return movieService.getAllByGenre(genre);
+	}
 }

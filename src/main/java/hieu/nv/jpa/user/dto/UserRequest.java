@@ -1,6 +1,7 @@
 package hieu.nv.jpa.user.dto;
 
-import hieu.nv.jpa.user.entity.User;
+import hieu.nv.jpa.user.entity.UserShortType;
+import hieu.nv.jpa.user.entity.UserType;
 import lombok.Data;
 
 @Data
@@ -11,6 +12,6 @@ public class UserRequest {
     private String firstName;
     private String lastName;
     private String phoneNumber;
-    private User.UserType userType;
-    private User.UserShortType userShortType;
+    private UserType userType;
+    private UserShortType userShortType;
 }

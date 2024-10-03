@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
@@ -49,5 +51,10 @@ public class UserController {
 	@PostMapping("/filter")
 	public ResponseEntity<?> filter(@RequestBody UserFilterDto filter) {
 		return ResponseEntity.ok(userService.filterUser(filter));
+	}
+
+	@PostMapping("/ids")
+	public ResponseEntity<?> filter(@RequestBody List<String> userIds) {
+		return ResponseEntity.ok(userService.findByUserIds(userIds));
 	}
 }
