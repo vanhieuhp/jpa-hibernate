@@ -7,6 +7,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -51,16 +52,8 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
-	public String getAllMoviesByYear(String year) {
-		try {
-			List<Movie> movies = movieRepository.findAllByYear(year);
-			Thread.sleep(1);
-			return "Movies: " + movies.size() + " entries";
-		} catch (InterruptedException e) {
-			log.error("Error: {}", e.getMessage());
-		}
-		return "Movies: 0 entries";
-
+	public List<Movie> getAllMoviesByYear(String year) {
+		return movieRepository.findAllByYear(year);
 	}
 
 	@Override

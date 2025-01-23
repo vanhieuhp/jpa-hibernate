@@ -19,7 +19,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, String>, JpaSpecificationExecutor<User>, UserRepositoryCustom {
+public interface UserRepository extends JpaRepository<User, String>, JpaSpecificationExecutor<User>,
+        UserRepositoryCustom {
 
     @Override
 //    @EntityGraph(value = "user[roles]")

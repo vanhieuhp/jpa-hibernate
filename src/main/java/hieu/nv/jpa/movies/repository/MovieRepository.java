@@ -1,8 +1,12 @@
 package hieu.nv.jpa.movies.repository;
 
+import hieu.nv.jpa.movies.dto.MovieDto;
 import hieu.nv.jpa.movies.entity.Movie;
+import hieu.nv.jpa.movies.projection.MovieBigProjection;
+import hieu.nv.jpa.movies.projection.MovieSmallProjection;
 import jakarta.persistence.QueryHint;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.QueryHints;
 
 import java.util.List;
@@ -22,10 +26,6 @@ public interface MovieRepository extends JpaRepository<Movie, String> {
 //			@QueryHint(name = "org.hibernate.readOnly", value = "true"), // read-only
 	})
 	List<Movie> findAllByYear(String year);
-//    @QueryHints(value = {
-//            @QueryHint(name = "org.hibernate.cacheable", value = "true"),
-//    })
-    List<Movie> findAllByYear(String year);
 
     @Query("SELECT m FROM Movie m WHERE m.genre = :genre")
     List<MovieSmallProjection> findAllByGenreProjection(String genre);
@@ -44,9 +44,6 @@ public interface MovieRepository extends JpaRepository<Movie, String> {
     @Query("SELECT m FROM Movie m WHERE m.genre = :genre")
     List<Movie> findAllByGenreAllField(String genre);
 
-//    @QueryHints(value = {
-//            @QueryHint(name = "org.hibernate.cacheable", value = "true"),
-//    })
     @Query("SELECT m FROM Movie m")
     List<Movie> findAllMovies();
 
