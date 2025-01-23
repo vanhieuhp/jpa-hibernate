@@ -2,6 +2,7 @@ package hieu.nv.jpa.user.repository;
 
 import hieu.nv.jpa.user.dto.UserFilter;
 import hieu.nv.jpa.user.entity.User;
+import hieu.nv.jpa.user.entity.UserJoinOptions;
 import hieu.nv.jpa.user.entity.UserType;
 import jakarta.persistence.criteria.*;
 import jakarta.validation.constraints.NotNull;
@@ -18,28 +19,39 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, String>, JpaSpecificationExecutor<User> {
+public interface UserRepository extends JpaRepository<User, String>, JpaSpecificationExecutor<User>, UserRepositoryCustom {
 
     @Override
 //    @EntityGraph(value = "user[roles]")
     Optional<User> findById(String id);
 
-    @EntityGraph(value = "user[h_groups]")
+    @EntityGraph(value = UserJoinOptions.USER_GROUP)
     User findByUsername(String username);
 
     @Override
-    @EntityGraph(value = "user[roles][h_groups]")
+    @EntityGraph(value = UserJoinOptions.USER_ROLE_LANGUAGE_GROUP)
     List<User> findAll();
 
-    //    @Query("SELECT u FROM User u WHERE u.userType IN :userTypes")
     List<User> findByUserTypeIn(List<UserType> userTypes);
 
     @Query("SELECT u FROM User u WHERE u.id IN :userIds")
     List<User> findByUserIds(List<String> userIds);
 
-    @EntityGraph(value = "user[roles]")
+    @EntityGraph(value = UserJoinOptions.USER_ROLE)
     @Query("SELECT u FROM User u WHERE u.id IN :userIds")
-    List<User> findByUserIdsWithRoles(List<String> userIds);
+    List<User> findByUserIdsAndJoinRoles(List<String> userIds);
+
+    @EntityGraph(value = UserJoinOptions.USER_LANGUAGE)
+    @Query("SELECT u FROM User u WHERE u.id IN :userIds")
+    List<User> findByUserIdsAndJoinLanguages(List<String> userIds);
+
+    @EntityGraph(value = UserJoinOptions.USER_LANGUAGE_GROUP)
+    @Query("SELECT u FROM User u WHERE u.id IN :userIds")
+    List<User> findByUserIdsAndJoinLanguagesAndGroups(List<String> userIds);
+
+    @EntityGraph(value = UserJoinOptions.USER_ROLE_LANGUAGE)
+    @Query("SELECT u FROM User u WHERE u.id IN :userIds")
+    List<User> findByUserIdsAndJoinLanguagesAndRoles(List<String> userIds);
 
     record UserSpecification(@NonNull UserFilter filter) implements Specification<User> {
 

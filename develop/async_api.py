@@ -17,7 +17,8 @@ async def call_api_multiple_times(url, times=10):
             "amount": 1
         }
         for _ in range(times):
-            tasks.append(update_payment(session, url, body))
+#             tasks.append(update_payment(session, url, body))
+            tasks.append(fetch(session, url))
 
         # Run the tasks concurrently
         responses = await asyncio.gather(*tasks)
@@ -26,8 +27,8 @@ async def call_api_multiple_times(url, times=10):
 
 # Example usage
 id = "40960684-0194-4e85-a607-e979deb35574"
-url = f"http://localhost:8080/api/v1/jpa/payments/{id}/decrease"  # Replace with your actual API
-
+# url = f"http://localhost:8080/api/v1/jpa/payments/{id}/decrease"  # Replace with your actual API
+url = "http://localhost:8080/api/v1/jpa/movies/filter?year=2000" # fetch all movies year is 2000
 async def main():
     responses = await call_api_multiple_times(url)
     for idx, response in enumerate(responses):

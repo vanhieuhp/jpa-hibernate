@@ -1,8 +1,6 @@
 package hieu.nv.jpa.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import hieu.nv.jpa.group.entity.Group;
-import hieu.nv.jpa.role.entity.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +9,7 @@ import lombok.ToString;
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,11 +19,16 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = "users")
 @NamedEntityGraphs({
-        @NamedEntityGraph(name = "user[roles]", attributeNodes = {@NamedAttributeNode("roles")}),
-        @NamedEntityGraph(name = "user[h_groups]", attributeNodes = {@NamedAttributeNode("h_groups")}),
-        @NamedEntityGraph(name = "user[roles][h_groups]", attributeNodes = {
+        @NamedEntityGraph(name = UserJoinOptions.USER_ROLE, attributeNodes = {@NamedAttributeNode("roles")}),
+        @NamedEntityGraph(name = UserJoinOptions.USER_GROUP, attributeNodes = {@NamedAttributeNode("h_groups")}),
+        @NamedEntityGraph(name = UserJoinOptions.USER_ROLE_GROUP, attributeNodes = {
                 @NamedAttributeNode("roles"),
                 @NamedAttributeNode("h_groups")
+        }),
+        @NamedEntityGraph(name = UserJoinOptions.USER_LANGUAGE, attributeNodes = {@NamedAttributeNode("languages")}),
+        @NamedEntityGraph(name = UserJoinOptions.USER_ROLE_LANGUAGE, attributeNodes = {
+                @NamedAttributeNode("languages"),
+                @NamedAttributeNode("roles")
         })
 })
 public class User {
@@ -76,6 +80,10 @@ public class User {
     @ToString.Exclude
     @JsonManagedReference
     private Set<Group> h_groups;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Language> languages;
 
 //    @Transient
     @Column(name = "user_type")

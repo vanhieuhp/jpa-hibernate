@@ -1,7 +1,7 @@
 package hieu.nv.jpa.user.dto;
 
-import hieu.nv.jpa.group.entity.Group;
-import hieu.nv.jpa.role.entity.Role;
+import hieu.nv.jpa.user.entity.Group;
+import hieu.nv.jpa.user.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

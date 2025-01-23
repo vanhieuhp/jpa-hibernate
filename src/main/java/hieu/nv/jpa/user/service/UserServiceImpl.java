@@ -1,10 +1,10 @@
 package hieu.nv.jpa.user.service;
 
-import hieu.nv.jpa.group.entity.Group;
 import hieu.nv.jpa.user.dto.FilterDto;
 import hieu.nv.jpa.user.dto.UserFilter;
 import hieu.nv.jpa.user.dto.UserFilterDto;
 import hieu.nv.jpa.user.dto.UserRequest;
+import hieu.nv.jpa.user.entity.Group;
 import hieu.nv.jpa.user.entity.User;
 import hieu.nv.jpa.user.entity.UserType;
 import hieu.nv.jpa.user.repository.UserRepository;
@@ -34,7 +34,6 @@ import static org.springframework.data.jpa.domain.Specification.where;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-
 
     @Override
     @Transactional
@@ -127,12 +126,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findByUserIds(List<String> userIds) {
-        return userRepository.findByUserIds(userIds).stream()
+        return userRepository.findByUserIdsAndJoinLanguagesAndRoles(userIds).stream()
                 .map(user -> {
                     User result = new User();
                     result.setId(user.getId());
                     result.setUsername(user.getUsername());
-//                    result.setRoles(user.getRoles());
+                    result.setRoles(user.getRoles());
+                    result.setLanguages(user.getLanguages());
                     return result;
                 })
                 .collect(Collectors.toList());

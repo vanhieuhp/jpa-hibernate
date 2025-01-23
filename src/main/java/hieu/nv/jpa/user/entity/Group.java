@@ -1,22 +1,22 @@
-package hieu.nv.jpa.role.entity;
+package hieu.nv.jpa.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import hieu.nv.jpa.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.util.Date;
 import java.util.List;
 
+@Entity
 @Getter
 @Setter
-@Entity
 @Builder
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "roles")
-public class Role {
+@Table(name = "h_groups")
+public class Group {
 
 	@Id
 	@UuidGenerator
@@ -25,12 +25,12 @@ public class Role {
 	@Column(name = "title")
 	private String title;
 
-	@Column(name = "system_name")
-	private String systemName;
+	@Column(name = "created_at")
+	private Date createdAt;
 
-	@ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
-	@JsonBackReference
+	@ManyToMany(mappedBy = "h_groups", fetch = FetchType.LAZY)
 	@ToString.Exclude
+	@JsonBackReference
 	private List<User> users;
-}
 
+}

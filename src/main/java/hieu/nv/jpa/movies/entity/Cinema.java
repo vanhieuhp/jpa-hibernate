@@ -25,7 +25,7 @@ public class Cinema {
 
 //    @JsonManagedReference
 //    @OneToMany(mappedBy="assignedCinema", fetch = FetchType.EAGER)
-////    @MapKey(name="year")
-////    private Map<String, Movie> movies
+//    @MapKey(name="year")
+//   private Map<String, Movie> movies
 //    private List<Movie> movies;
 }

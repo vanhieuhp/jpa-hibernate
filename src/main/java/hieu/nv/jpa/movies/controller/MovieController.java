@@ -2,6 +2,7 @@ package hieu.nv.jpa.movies.controller;
 
 import hieu.nv.jpa.movies.dto.MovieRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
@@ -41,8 +42,8 @@ public class MovieController {
 	}
 
 	@GetMapping("/filter")
-	public List<Movie> getAllMoviesByYear(@RequestParam(name = "year") String year) {
-		return movieService.getAllMoviesByYear(year);
+	public ResponseEntity<?> getAllMoviesByYear(@RequestParam(name = "year") String year) {
+		return ResponseEntity.ok(movieService.getAllMoviesByYear(year));
 	}
 
 	@GetMapping("/genre")
