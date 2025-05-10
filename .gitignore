@@ -68,3 +68,4 @@ venv/
 
 .venv/
 node_modules/
+.idea/
